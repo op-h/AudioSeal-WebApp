@@ -64,7 +64,7 @@ Installation & Setup
 
 Clone the repository:
 
-git clone [[https://github.com/your-username/AudioSeal-WebApp.git]([https://github.com/your-username/AudioSeal-WebApp.git](https://github.com/op-h/AudioSeal-WebApp))](https://github.com/op-h/AudioSeal-WebApp.git)
+git clone [https://github.com/op-h/AudioSeal-WebApp.git]
 cd AudioSeal-WebApp
 
 

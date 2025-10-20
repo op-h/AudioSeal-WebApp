@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AudioSeal - Digital Audio Watermarking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <h1>AudioSeal</h1>
+            </div>
+            <p>A tool to hide secret messages inside audio files and detect them later.</p>
+        </header>
+
+        <main>
+            <!-- Embed Section -->
+            <div class="card" id="embed-card">
+                <h2><span class="icon">📥</span> Embed Watermark</h2>
+                <form id="embed-form">
+                    <div class="form-group drop-area" id="embed-drop-area">
+                        <label for="embed-audio">Drag & Drop Audio File Here</label>
+                        <span>or</span>
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('embed-audio').click();">Choose File</button>
+                        <input type="file" id="embed-audio" name="audio" accept="audio/*" required>
+                        <!-- CHANGE: Added span to display the chosen file name -->
+                        <span class="file-name" id="embed-file-name">No file chosen</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="watermark-text">Secret Message</label>
+                        <input type="text" id="watermark-text" name="watermark" placeholder="Enter your secret text..." required>
+                    </div>
+                    <button type="submit" class="btn">Seal the Audio</button>
+                </form>
+            </div>
+
+            <!-- Detect Section -->
+            <div class="card" id="detect-card">
+                <h2><span class="icon">🔎</span> Detect Watermark</h2>
+                <form id="detect-form">
+                    <div class="form-group drop-area" id="detect-drop-area">
+                        <label for="detect-audio">Drag & Drop Sealed File Here</label>
+                        <span>or</span>
+                        <button type="button" class="btn-secondary" onclick="document.getElementById('detect-audio').click();">Choose File</button>
+                        <input type="file" id="detect-audio" name="audio" accept="audio/*" required>
+                        <!-- CHANGE: Added span to display the chosen file name -->
+                        <span class="file-name" id="detect-file-name">No file chosen</span>
+                    </div>
+                    <button type="submit" class="btn">Reveal the Secret</button>
+                </form>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-area" class="card" style="display: none;">
+                <h2>Results</h2>
+                <div id="loader" class="loader" style="display: none;"></div>
+                <div id="result-content">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Designed by OPH</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

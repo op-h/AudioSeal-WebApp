@@ -1,0 +1,336 @@
+/* --- Root Variables for easy theme management --- */
+:root {
+    --primary-color: #5e5ce6;
+    --secondary-color: #00a8e8;
+    --background-start: #1c1c1e;
+    --background-end: #2c2c2e;
+    --glass-background: rgba(44, 44, 46, 0.6);
+    --text-color: #f2f2f7;
+    --text-color-light: #a3a3a8;
+    --border-color: rgba(142, 142, 147, 0.4);
+    --success-color: #34c759;
+    --error-color: #ff3b30;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* --- Universal Enhancements --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--background-start), var(--background-end));
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* --- Animated Background Shapes --- */
+.background-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(80px);
+}
+
+.shape1 {
+    width: 400px;
+    height: 400px;
+    background-color: var(--primary-color);
+    top: -100px;
+    left: -100px;
+    animation: move 20s infinite alternate ease-in-out;
+}
+
+.shape2 {
+    width: 300px;
+    height: 300px;
+    background-color: var(--secondary-color);
+    bottom: -50px;
+    right: -50px;
+    animation: move 25s infinite alternate-reverse ease-in-out;
+}
+
+.shape3 {
+    width: 250px;
+    height: 250px;
+    background-color: var(--success-color);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: move 15s infinite alternate ease-in-out;
+}
+
+@keyframes move {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+    to {
+        transform: translate(100px, 50px) scale(1.2);
+    }
+}
+
+/* --- Main Layout --- */
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+header {
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.logo svg {
+    color: var(--primary-color);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+header p {
+    color: var(--text-color-light);
+    font-size: 1.1rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* --- Glassmorphism Card Style --- */
+.card {
+    background: var(--glass-background);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px 0 var(--shadow-color);
+}
+
+.card h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.card .icon {
+    font-size: 1.8rem;
+}
+
+/* Make result card span both columns */
+#results-area {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+/* --- Form Elements --- */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-color-light);
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group input[type="file"] {
+    display: none; /* Hide the default file input */
+}
+
+/* --- Drag and Drop Area --- */
+.drop-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.drop-area:hover, .drop-area.dragover {
+    background-color: rgba(94, 92, 230, 0.1);
+    border-color: var(--primary-color);
+}
+
+.drop-area span {
+    display: block;
+    margin: 10px 0;
+    color: var(--text-color-light);
+}
+
+/* --- CHANGE: Style for the filename display --- */
+.file-name {
+    display: block;
+    margin-top: 15px;
+    color: var(--text-color);
+    font-style: italic;
+    font-weight: 600;
+    word-break: break-all; /* Break long filenames */
+    transition: color 0.3s ease;
+}
+
+.file-name.active {
+    color: var(--success-color);
+}
+
+/* --- Buttons --- */
+.btn, .btn-secondary {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:focus, .btn-secondary:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+
+.btn {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(94, 92, 230, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Loader and Results --- */
+.loader {
+    border: 5px solid var(--glass-background);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#result-content a {
+    display: inline-block;
+    background: var(--success-color);
+    color: white;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin: 10px 0;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#result-content a:hover {
+    background-color: #2aa34a;
+    transform: translateY(-2px);
+}
+
+#result-content p.error {
+    color: var(--error-color);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+#result-content p.success {
+    color: var(--success-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--text-color-light);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    header h1 {
+        font-size: 2rem;
+    }
+}
+

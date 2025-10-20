@@ -1,0 +1,10 @@
+# Python virtual environment
+venv/
+__pycache__/
+
+# Temporary files created by the app
+uploads/
+outputs/
+
+# OS-specific files
+.DS_Store

@@ -6,6 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultContent = document.getElementById('result-content');
     const loader = document.getElementById('loader');
 
+    // --- NEW: Function to escape HTML and prevent XSS ---
+    function escapeHTML(str) {
+        if (typeof str !== 'string') {
+            return '';
+        }
+        return str.replace(/[&<>"']/g, function(m) {
+            return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            }[m];
+        });
+    }
+    // --- END NEW ---
+
     // --- ENHANCEMENT: Function to handle filename display ---
     function updateFileNameDisplay(inputElement, fileNameDisplayElement, fileName) {
         if (fileName) {
@@ -105,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const downloadUrl = `/download/${filename}`;
                 showResult(false, `<a href="${downloadUrl}" download>Download Sealed File (${filename})</a>`);
             } else {
-                showResult(false, `<p class="error">Error: ${data.error}</p>`);
+                showResult(false, `<p class="error">Error: ${escapeHTML(data.error)}</p>`);
             }
 
         } catch (error) {
@@ -132,10 +149,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.watermark === "[No Watermark Found]") {
                     showResult(false, `<p class="error">No watermark was found in this file.</p>`);
                 } else {
-                    showResult(false, `<p class="success">Secret Message Found: "${data.watermark}"</p>`);
+                    // --- CHANGE: Sanitize the output to prevent XSS ---
+                    const safeWatermark = escapeHTML(data.watermark);
+                    showResult(false, `<p class="success">Secret Message Found: "${safeWatermark}"</p>`);
+                    // --- END CHANGE ---
                 }
             } else {
-                showResult(false, `<p class="error">Error: ${data.error}</p>`);
+                // --- CHANGE: Also escape error messages here ---
+                showResult(false, `<p class="error">Error: ${escapeHTML(data.error)}</p>`);
+                // --- END CHANGE ---
             }
 
         } catch (error) {
@@ -144,4 +166,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
-

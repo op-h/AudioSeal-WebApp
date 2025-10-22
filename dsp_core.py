@@ -20,7 +20,13 @@ def embed_lsb(input_file_path, watermark_text, output_file_path):
     """Embeds a text watermark into an audio file using the LSB method."""
     temp_wav_path = os.path.splitext(input_file_path)[0] + "_temp.wav"
     try:
-        audio = AudioSegment.from_file(input_file_path)
+        # --- CHANGE: Added specific error handling for file loading ---
+        try:
+            audio = AudioSegment.from_file(input_file_path)
+        except Exception as e:
+            raise ValueError(f"Could not read audio file. It might be corrupt or an unsupported format. Error: {e}")
+        # --- END CHANGE ---
+        
         audio.export(temp_wav_path, format="wav")
 
         audio_data, samplerate = sf.read(temp_wav_path, dtype='int16')
@@ -33,7 +39,7 @@ def embed_lsb(input_file_path, watermark_text, output_file_path):
         watermark_bits = text_to_bits(watermark_text)
     
         if len(watermark_bits) > len(working_data):
-            raise ValueError("Audio file is too small to hold the watermark.")
+            raise ValueError("Audio file is too small to hold the watermark. Please use a larger file or shorter message.")
 
         for i, bit in enumerate(watermark_bits):
             if bit == '1':
@@ -57,7 +63,13 @@ def detect_lsb(input_file_path):
     """Detects a text watermark from an audio file efficiently."""
     temp_wav_path = os.path.splitext(input_file_path)[0] + "_temp.wav"
     try:
-        audio = AudioSegment.from_file(input_file_path)
+        # --- CHANGE: Added specific error handling for file loading ---
+        try:
+            audio = AudioSegment.from_file(input_file_path)
+        except Exception as e:
+            raise ValueError(f"Could not read audio file. It might be corrupt or an unsupported format. Error: {e}")
+        # --- END CHANGE ---
+
         audio.export(temp_wav_path, format="wav")
         audio_data, _ = sf.read(temp_wav_path, dtype='int16')
 
@@ -93,4 +105,3 @@ def detect_lsb(input_file_path):
         # This block ensures the temp file is ALWAYS deleted
         if os.path.exists(temp_wav_path):
             os.remove(temp_wav_path)
-

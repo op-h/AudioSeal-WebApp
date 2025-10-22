@@ -45,7 +45,11 @@ def handle_embed():
         input_path = os.path.join(app.config['UPLOAD_FOLDER'], input_filename)
         file.save(input_path)
 
-        output_filename = "sealed_" + os.path.splitext(input_filename)[0] + '.wav'
+        # --- CHANGE: Changed output format from .wav to .flac ---
+        # This is a lossless format that is smaller than .wav
+        output_filename = "sealed_" + os.path.splitext(input_filename)[0] + '.flac'
+        # --- END CHANGE ---
+        
         output_path = os.path.join(app.config['OUTPUT_FOLDER'], output_filename)
 
         # --- Call the DSP core function ---
@@ -97,4 +101,3 @@ def download_file(filename):
 
 if __name__ == '__main__':
     app.run(debug=True)
-

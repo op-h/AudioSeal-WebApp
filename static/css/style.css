@@ -97,6 +97,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    /* --- CHANGE: Add padding to prevent content overlapping footer --- */
+    padding-bottom: 60px; 
 }
 
 header {
@@ -322,6 +324,13 @@ footer {
     text-align: center;
     margin-top: 20px;
     color: var(--text-color-light);
+    
+    /* --- CHANGE: Make footer stick to bottom --- */
+    position: absolute;
+    bottom: 20px; /* 20px from the bottom */
+    width: 100%; /* Full width of the viewport */
+    left: 0;
+    /* --- END CHANGE --- */
 }
 
 /* --- Responsive Design --- */
@@ -333,4 +342,3 @@ footer {
         font-size: 2rem;
     }
 }
-

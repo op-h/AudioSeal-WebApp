@@ -1,16 +1,16 @@
 /* --- Root Variables for easy theme management --- */
 :root {
-    --primary-color: #5e5ce6;
-    --secondary-color: #00a8e8;
-    --background-start: #1c1c1e;
-    --background-end: #2c2c2e;
-    --glass-background: rgba(44, 44, 46, 0.6);
-    --text-color: #f2f2f7;
-    --text-color-light: #a3a3a8;
-    --border-color: rgba(142, 142, 147, 0.4);
-    --success-color: #34c759;
-    --error-color: #ff3b30;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --primary-color: #ed1b24;
+    --secondary-color: #cc0000;
+    --background-start: #111827;
+    --background-end: #1f2937;
+    --glass-background: rgba(31, 41, 55, 0.8);
+    --text-color: #f3f4f6;
+    --text-color-light: #9ca3af;
+    --border-color: rgba(237, 27, 36, 0.3);
+    --success-color: #22c55e;
+    --error-color: #ef4444;
+    --shadow-color: rgba(0, 0, 0, 0.5);
 }
 
 /* --- Universal Enhancements --- */
@@ -211,7 +211,7 @@ main {
 }
 
 .drop-area:hover, .drop-area.dragover {
-    background-color: rgba(94, 92, 230, 0.1);
+    background-color: rgba(237, 27, 36, 0.1);
     border-color: var(--primary-color);
 }
 
@@ -261,7 +261,7 @@ main {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(94, 92, 230, 0.4);
+    box-shadow: 0 4px 15px rgba(237, 27, 36, 0.4);
 }
 
 .btn-secondary {
